@@ -23,7 +23,7 @@ h1{margin:0;text-align:center;font-family:var(--display);font-size:clamp(46px,10
 .w{display:inline-block;white-space:nowrap}
 .l{display:inline-block;animation:in .62s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i) * 125ms + 180ms)}
 @keyframes in{from{opacity:0;transform:translateY(.22em)}to{opacity:1;transform:none}}
-.contact{display:grid;justify-items:center;gap:16px;text-align:center}
+.contact{display:grid;justify-items:center;gap:14px;text-align:center;margin-top:calc(clamp(12px,2.6vw,32px) * -1)}
 .who{min-width:0}.name{font-size:clamp(21px,2.4vw,26px);font-weight:600}.role{margin-top:4px;color:var(--soft);font-size:15px;line-height:1.45}
 .links{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;max-width:100%}
 .links a,.mail{color:var(--paper);text-decoration:none;font-weight:600;font-size:15px;min-height:44px;padding:0 17px;border:1.5px solid var(--line);border-radius:8px;display:inline-flex;align-items:center}
@@ -43,11 +43,11 @@ video{display:block;width:100%;max-width:100%;aspect-ratio:16/9;background:var(-
 <body>
 <main>
 <h1 aria-label="Hi People of Stan"><span aria-hidden="true"><span class="w"><span class="l" style="--i:0">H</span><span class="l" style="--i:1">i</span></span> <span class="w"><span class="l" style="--i:2">P</span><span class="l" style="--i:3">e</span><span class="l" style="--i:4">o</span><span class="l" style="--i:5">p</span><span class="l" style="--i:6">l</span><span class="l" style="--i:7">e</span></span> <span class="w"><span class="l" style="--i:8">o</span><span class="l" style="--i:9">f</span></span> <span class="w"><span class="l" style="--i:10">S</span><span class="l" style="--i:11">t</span><span class="l" style="--i:12">a</span><span class="l" style="--i:13">n</span></span></span></h1>
-<figure class="stage"><div class="card" id="card"><video id="v" controls playsinline preload="metadata" poster="poster.jpg" src="pitch.mp4?v=2" aria-label="Creator Collab Engine pitch video"></video></div></figure>
-<footer class="contact" aria-label="Contact">
+<section class="contact" aria-label="Contact">
 <div class="who"><div class="name">Jainder Bal</div><div class="role">CS student, John Abbott College, Montreal</div></div>
 <div class="links"><a href="https://www.linkedin.com/in/jainder/" target="_blank" rel="noopener">LinkedIn</a><div class="mail"><span id="email">baljainder1@gmail.com</span><button id="copy" type="button">Copy</button></div></div>
-</footer>
+</section>
+<figure class="stage"><div class="card" id="card"><video id="v" controls playsinline preload="metadata" poster="poster.jpg" src="pitch.mp4?v=2" aria-label="Creator Collab Engine pitch video"></video></div></figure>
 </main>
 <script>
 const card=document.getElementById('card'),v=document.getElementById('v'),copy=document.getElementById('copy');
