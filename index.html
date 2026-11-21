@@ -36,6 +36,11 @@ h1{margin:0;text-align:center;font-family:var(--display);font-size:clamp(46px,10
 .card::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(circle at var(--mx) var(--my),rgba(255,255,255,.2),transparent 42%);transition:opacity .25s}
 .card.playing{--rx:0deg!important;--ry:0deg!important}.card.playing::after{opacity:0}
 video{display:block;width:100%;max-width:100%;aspect-ratio:16/9;background:var(--deep);border-radius:clamp(7px,1vw,11px)}
+.play{position:absolute;left:50%;top:50%;z-index:2;width:clamp(68px,9vw,104px);height:clamp(68px,9vw,104px);padding:0;display:grid;place-items:center;border:0;border-radius:50%;background:var(--paper);color:var(--stan);cursor:pointer;transform:translate(-50%,-50%) translateZ(36px);transition:transform .16s ease-out,opacity .16s;box-shadow:inset 0 -3px 0 #d8d4ff,0 4px 0 #bdb6ff,0 8px 0 var(--deep),0 22px 34px rgba(14,8,82,.55)}
+.play svg{width:42%;height:42%;margin-left:7%;fill:currentColor}
+.play:hover{transform:translate(-50%,-50%) translateZ(36px) scale(1.07)}.play:active{transform:translate(-50%,-52%) translateZ(36px) scale(.97)}
+.play:focus-visible{outline:3px solid var(--paper);outline-offset:4px}
+.play.off{opacity:0;pointer-events:none}
 @media (max-width:600px){.card{--rx:4deg}}
 @media (prefers-reduced-motion:reduce){.l{animation:none}.card{--rx:0deg;transition:none}}
 </style>
@@ -47,7 +52,7 @@ video{display:block;width:100%;max-width:100%;aspect-ratio:16/9;background:var(-
 <div class="who"><div class="name">Jainder Bal</div><div class="role">CS student, John Abbott College, Montreal</div></div>
 <div class="links"><a href="https://www.linkedin.com/in/jainder/" target="_blank" rel="noopener">LinkedIn</a><div class="mail"><span id="email">baljainder1@gmail.com</span><button id="copy" type="button">Copy</button></div></div>
 </section>
-<figure class="stage"><div class="card" id="card"><video id="v" controls playsinline preload="metadata" poster="poster.jpg" src="pitch.mp4?v=2" aria-label="Creator Collab Engine pitch video"></video></div></figure>
+<figure class="stage"><div class="card" id="card"><video id="v" controls playsinline preload="metadata" poster="poster.jpg" src="pitch.mp4?v=2" aria-label="Creator Collab Engine pitch video"></video><button class="play" id="play" type="button" aria-label="Play pitch video"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 2.8v18.4c0 .9 1 1.5 1.8 1l15-9.2c.7-.5.7-1.5 0-2l-15-9.2C6 1.3 5 1.9 5 2.8Z"/></svg></button></div></figure>
 </main>
 <script>
 const card=document.getElementById('card'),v=document.getElementById('v'),copy=document.getElementById('copy');
@@ -60,6 +65,9 @@ v.addEventListener('play',()=>{['--rx','--ry'].forEach(k=>card.style.removePrope
 v.addEventListener('pause',()=>card.classList.remove('playing'));
 v.addEventListener('ended',()=>card.classList.remove('playing'));
 copy.addEventListener('click',async()=>{const t=document.getElementById('email');try{await navigator.clipboard.writeText(t.textContent);copy.textContent='Copied'}catch(e){const s=getSelection(),n=document.createRange();n.selectNodeContents(t);s.removeAllRanges();s.addRange(n);copy.textContent='Selected'}setTimeout(()=>copy.textContent='Copy',1800)});
+const play=document.getElementById('play'),syncPlay=()=>play.classList.toggle('off',!v.paused);
+play.addEventListener('click',()=>{v.play().catch(syncPlay)});
+['play','playing','pause','ended'].forEach(n=>v.addEventListener(n,syncPlay));syncPlay();
 </script>
 </body>
 </html>
